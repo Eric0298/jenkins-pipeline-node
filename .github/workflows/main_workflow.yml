@@ -46,6 +46,6 @@ jobs:
     needs: [linter-execution, test-execution]
     steps:
       - name: Hello world enviroment
-        uses: actions/github-actions-hello@v1
+        uses: adeloyedeji/github-actions-hello@v1.0
         with:
           who-to-greet: '2 DAW'
