@@ -40,11 +40,14 @@ jobs:
 
       - name: Run Jest Test
         run: npm run test
-  enviroment_test_execution:
-      runs-on: ubuntu-latest
-      needs: [linter-execution, test-execution]
-      steps:
-        - name: Hello world enviroment 
-           uses: actions/github-actions-hello@v1
-           with:
-            who-to-greet: '2 DAW'
+
+
+   enviroment_test_execution:
+    runs-on: ubuntu-latest
+    needs: [linter-execution, test-execution]
+    steps:
+      - name: Hello world enviroment
+        uses: actions/github-actions-hello@v1
+        with:
+          who-to-greet: '2 DAW'
+
