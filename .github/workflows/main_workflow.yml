@@ -3,7 +3,7 @@ name: main_workflow
 on:
   push:
     branches:
-      - nodejs_enviroment_job
+      - nodejs_testError
 
 jobs:
   linter-execution:
