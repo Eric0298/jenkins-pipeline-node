@@ -40,6 +40,11 @@ jobs:
 
       - name: Run Jest Test
         run: npm run test
+        id: jest
+        continue-on-error: true
+      - name: Fails
+        if: steps.jest.outcome == 'failure'
+        run: echo "Test fallido, se ha producido un error" && exit 1
 
   enviroment_test_execution:
     runs-on: ubuntu-latest
