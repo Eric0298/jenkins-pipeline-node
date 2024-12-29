@@ -43,7 +43,7 @@ jobs:
         id: jest
         continue-on-error: true
       - name: Fails
-        if: steps.jest.outcome == 'failure'
+        if: steps.jest.outcome != 'success'
         run: echo "Test fallido, se ha producido un error" && exit 1
 
   enviroment_test_execution:
