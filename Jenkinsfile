@@ -1,20 +1,13 @@
 pipeline{
     agent any
     tools{nodejs 'Node'}
+    parameters{
+        string(name: 'persona_a_saludar', defaultValue:'user', description: 'Persona a saludar')
+    }
     stages{
-        stage('Instalar'){
+        stage('Ejecucion'){
             steps{
-                sh 'npm install'
-            }
-        } 
-        stage('Test'){
-            steps{
-                sh 'npm run test'
-            }
-        }
-        stage ('Deploy') {
-            steps{
-                sh 'npm start'
+                sh "node index.js '${params.persona_a_saludar}'"
             }
         }
     }
