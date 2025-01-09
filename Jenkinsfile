@@ -4,6 +4,9 @@ pipeline{
     parameters{
       string(name: 'persona_a_saludar', defaultValue: 'user', description: 'persona_a_saludar')    
     }
+    triggers{
+        cron('*/5 * * * *')
+    }
     stages{
         stage('Ejecucion'){
             steps{
