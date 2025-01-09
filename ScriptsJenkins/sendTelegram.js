@@ -1,23 +1,21 @@
 const TelegramBot = require('node-telegram-bot-api');
-
-// Leer argumentos de entrada.
 const message = process.argv[2];
 const chatID = process.argv[3];
+const botTOKEN = '7864713946:AAG5UjMYTm39SdLAALunWhqWVe2oWF80tyQ';
 
-if (!chatID || isNaN(chatID)) {
-    console.error('Error: chatID no proporcionado o inválido.');
+if (!message || !chatID) {
+    console.error('Error: mensaje o chatID no proporcionado.');
     process.exit(1);
 }
 
-const botTOKEN = '7864713946:AAG5UjMYTm39SdLAALunWhqWVe2oWF80tyQ'; // Reemplázalo si es necesario.
-const bot = new TelegramBot(botTOKEN, { polling: false });
+const bot = new TelegramBot(botTOKEN, {polling: false});
 
 bot.sendMessage(chatID, message)
     .then(() => {
-        console.log('Mensaje enviado correctamente a Telegram.');
+        console.log('Mensaje enviado correctamente.');
         process.exit(0);
     })
-    .catch((e) => {
-        console.error('Error al enviar mensaje:', e.message);
+    .catch((err) => {
+        console.error('Error al enviar mensaje:', err.message);
         process.exit(1);
     });
