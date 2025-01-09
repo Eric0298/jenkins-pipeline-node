@@ -32,16 +32,15 @@ pipeline {
                     echo "Resultado de Parametro 1: ${env.res_stage1}"
                     echo "Resultado de Parametro 2: ${env.res_stage2}"
 
+                    // Asignar mensaje a env.result_message
                     if (env.res_stage1 == 0 && env.res_stage2 == 0) {
-                        env.result_message = "El proyecto va viento en popa!!!"
-                        sh "echo '${env.result_message}'"
+                        env.result_message = "El projecte va vent en popa!!!"
                     } else if (env.res_stage1 == 0 && env.res_stage2 == 1) {
                         env.result_message = "Això pinta molt mal"
-                        sh "echo '${env.result_message}'"
                     } else {
-                        env.result_message = "Alguna de las dos stages ha fallado"
-                        sh "echo '${env.result_message}'"
+                        env.result_message = "Alguna de les dues stages ha fallat"
                     }
+                    echo "Mensaje final: ${env.result_message}"
                 }
             }
         }
@@ -49,7 +48,7 @@ pipeline {
     post {
         always {
             sh "npm install node-telegram-bot-api"
-            sh "node ./ScriptsJenkins/sendTelegram.js '${env.result_message}' '${params.chatID}'"
+            sh "node ./ScriptsJenkins/sendTelegram.js \"${env.result_message}\" \"${params.chatID}\""
         }
     }
 }
