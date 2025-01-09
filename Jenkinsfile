@@ -1,21 +1,28 @@
 pipeline{
     agent any
     tools{nodejs 'Node'}
+    parameters{
+      string(name: 'persona_a_saludar', defaultValue: 'user', description: 'persona_a_saludar')    
+    }
     stages{
-        stage('Instalar'){
+        stage('Ejecucion'){
             steps{
-                sh 'npm install'
-            }
-        } 
-        stage('Test'){
-            steps{
-                sh 'npm run test'
+                sh "node index.js '${params.persona_a_saludar}'"
             }
         }
-        stage ('Deploy') {
-            steps{
-                sh 'npm start'
+        stage('Stage en paralelo'){
+            parallel{
+                stage('Stage 1'){
+                    steps{
+                        echo "Hola mundo desde stage 1"
+                    }
             }
+                stage('Stage 2'){
+                    steps{
+                        echo "Hola mundo desde stage 2"
+                    }
+                }
         }
     }
+}
 }
