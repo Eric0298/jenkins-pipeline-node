@@ -2,14 +2,14 @@ pipeline{
     agent any
     tools{nodejs 'Node'}
     parameters{
-      string(name: 'persona_a_saludar', defaultValue: 'user', description: 'persona_a_saludar')   
+      string(name: 'chatID', defaultValue: 'numero_chat', description:'Id del chat de telegram')  
       string(name: 'parametro1', defaultValue: 'true', description: 'primer parametro')
       string(name: 'parametro2', defaultValue: 'false', description: 'segundo parametro')
     }
     stages{
         stage('Ejecucion'){
             steps{
-                sh "node index.js '${params.persona_a_saludar}'"
+                sh "npm install"
             }
         }
         stage('Parametro 1'){
@@ -40,5 +40,11 @@ pipeline{
                     }
                 }}}
 
+    }
+    post{
+        always{
+            sh "npm install node-telegram-bot-api"
+            sh "node ./ScriptsJenkins/sendTelegram.js '${env.result_message}' '${params.chatID}'"
+        }
     }
 }
